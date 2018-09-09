@@ -1,0 +1,20 @@
+<div>
+  <div>
+    <p>Add a meal</p>
+  </div>
+  <div>
+      <p>Your meals ({{ itemCount }})</p>
+  </div>
+</div>
+<div [@meals]="meals.length">
+  <div >
+    <p >Use this form below to add a new meal. What do you want to eat?</p>
+    <form>
+      <input type="text" name="item" placeholder="Meal..." [(ngModel)]="mealText"/>
+      <input type="submit" class="btn" [value]="btnText" (click)="addItem()"/>
+    </form>
+  </div>
+  <div>
+      <p class="life-container" *ngFor="let meal of meals; let i = index" (click)="removeItem(i)">{{ meal }}</p>
+  </div>
+</div>
