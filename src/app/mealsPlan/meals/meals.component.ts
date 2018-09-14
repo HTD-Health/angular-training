@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { trigger, style, transition, animate, keyframes, query, stagger } from '@angular/animations';
-import { DataService } from '../../data.service';
+import { MealService } from '../../services/meal.service';
 
 @Component({
   selector: 'app-meals',
@@ -33,30 +33,30 @@ import { DataService } from '../../data.service';
 })
 export class MealsComponent implements OnInit {
 
-  itemCount: number = 4;
-  btnText: string = 'Add an item';
-  mealText: string = 'My first meal';
-  meals: Array<string> = [];
+  itemCount: number = 4
+  btnText: string = 'Add an item'
+  mealText: string = 'My first meal'
+  meals: Array<string> = []
 
-  constructor(private _data: DataService) { }
+  constructor(private _data: MealService) { }
 
   ngOnInit() {
-    this._data.meal.subscribe(res => this.meals = res);
-    this.itemCount = this.meals.length;
-    this._data.changeMeal(this.meals);
+    this._data.meal.subscribe(res => this.meals = res)
+    this.itemCount = this.meals.length
+    this._data.changeMeal(this.meals)
   }
 
   addItem() {
-    this.meals.push(this.mealText);
-    this.mealText = '';
-    this.itemCount = this.meals.length;
-    this._data.changeMeal(this.meals);
+    this.meals.push(this.mealText)
+    this.mealText = ''
+    this.itemCount = this.meals.length
+    this._data.changeMeal(this.meals)
   }
 
   removeItem(i) {
-    this.meals.splice(i, 1);
-    this._data.changeMeal(this.meals);
-    this.itemCount = this.meals.length;
+    this.meals.splice(i, 1)
+    this._data.changeMeal(this.meals)
+    this.itemCount = this.meals.length
   }
 
 }
