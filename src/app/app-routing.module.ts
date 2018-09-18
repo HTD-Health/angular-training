@@ -4,7 +4,7 @@ import { MealsComponent } from './mealsPlan/meals/meals.component';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { RecipesComponent } from './recipes/recipes.component';
 import { RecipeItemComponent } from './recipes/recipe-list/recipe-item/recipe-item.component';
-import { RecipeFormComponent } from './recipes/recipe-list/recipe-form/recipe-form.component';
+import { RecipeFormComponent } from './recipes/recipe-form/recipe-form.component';
 import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
 import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.component';
 
@@ -14,9 +14,9 @@ const routes: Routes = [
   {path: 'shopping', component: ShoppingListComponent},
   {path: 'recipes', component: RecipesComponent, children: [
     {path: '', component: RecipeStartComponent},
-    // {path: 'new', component: RecipeFormComponent},
+    {path: 'new', component: RecipeFormComponent},
     {path: ':id', component: RecipeDetailComponent},
-    // {path: ':id/edit', component: RecipeFormComponent}
+    {path: ':id/edit', component: RecipeFormComponent}
   ]}
 ];
 
