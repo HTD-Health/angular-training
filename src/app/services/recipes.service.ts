@@ -39,6 +39,10 @@ export class RecipesService {
         this.shoppingListService.addManyIngredients(ingredients)
     }
 
+    getChosenRecipe(id: number) {
+        return this.recipes[id]
+    }
+
     recipeSelected = new EventEmitter<Recipe>()
 
 }
