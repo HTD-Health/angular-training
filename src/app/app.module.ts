@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { MealService } from './services/meal.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { DropdownDirective } from './shared/dropdown.directive'
 import { AppComponent } from './app.component';
@@ -38,6 +38,7 @@ import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.compon
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule
   ],
   providers: [MealService, ShoppingListService],
