@@ -22,6 +22,17 @@ export class ShoppingListService {
         this.ingredientsChanged.next(this.ingredients.slice())
     }
 
+    getChosenIngredient(index: number) {
+        return this.ingredients[index]
+    }
+
+    updateIngredient(index: number, newIngredient: Ingredient) {
+        this.ingredients[index] = newIngredient
+        this.ingredientsChanged.next(this.ingredients.slice())
+    }
+
     ingredientsChanged = new Subject<Ingredient[]>()
+
+    startedEditing = new Subject<number>()
 
 }
