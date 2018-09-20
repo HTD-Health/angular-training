@@ -18,6 +18,7 @@ import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-ed
 import { ShoppingListService } from './services/shopping-list.service';
 import { RecipeFormComponent } from './recipes/recipe-form/recipe-form.component';
 import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
+import { RecipesService } from './services/recipes.service';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,7 @@ import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.compon
     ReactiveFormsModule,
     BrowserAnimationsModule
   ],
-  providers: [MealService, ShoppingListService],
+  providers: [MealService, ShoppingListService, RecipesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
