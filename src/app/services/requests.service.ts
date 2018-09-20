@@ -5,24 +5,27 @@ import { ShoppingListService } from '../services/shopping-list.service';
 import { Recipe } from '../shared/recipe.model'
 import { Ingredient } from '../shared/ingredient.model'
 import { map } from 'rxjs/operators'
+import { AuthService } from "./auth.service";
 
 @Injectable()
 
 export class RequestsService {
 
-    constructor(private http: Http, private shoppingsService: ShoppingListService, private recipesService: RecipesService) {}
+    constructor(private http: Http, private shoppingsService: ShoppingListService, private recipesService: RecipesService, private authService: AuthService) {}
 
     updateData() {
+        const token = this.authService.getToken()
         const recipes = this.recipesService.getRecipes()
         const shoppings = this.shoppingsService.getIngredients()
-        return this.http.put('https://ng-project-999a1.firebaseio.com/data.json', {
+        return this.http.put('https://ng-project-999a1.firebaseio.com/data.json?auth=' + token, {
             recipes: recipes,
             shoppings: shoppings
         })
     }
 
     fetchData() {
-        return this.http.get('https://ng-project-999a1.firebaseio.com/data.json').pipe(
+        const token = this.authService.getToken()
+        return this.http.get('https://ng-project-999a1.firebaseio.com/data.json?auth=' + token).pipe(
             map(
                 (response: Response) => {
                     const data: {shoppings: Ingredient[], recipes: Recipe[]} = response.json()
