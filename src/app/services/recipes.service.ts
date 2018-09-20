@@ -61,4 +61,9 @@ export class RecipesService {
         this.recipesChanged.next(this.getRecipes())
     }
 
+    updateAllRecipes(recipes: Recipe[]) {
+        this.recipes = recipes
+        this.recipesChanged.next(this.getRecipes())
+    }
+
 }
