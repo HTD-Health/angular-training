@@ -24,6 +24,7 @@ import { RequestsService } from './services/requests.service';
 import { SignupComponent } from './auth/signup/signup.component';
 import { SigninComponent } from './auth/signin/signin.component';
 import { AuthService } from './services/auth.service';
+import { AuthGuard } from './auth/auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,7 @@ import { AuthService } from './services/auth.service';
     BrowserAnimationsModule,
     HttpModule
   ],
-  providers: [MealService, ShoppingListService, RecipesService, RequestsService, AuthService],
+  providers: [MealService, ShoppingListService, RecipesService, RequestsService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

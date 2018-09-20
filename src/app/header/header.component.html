@@ -10,9 +10,12 @@
         <li class="hover-pointer" routerLinkActive="active"><a routerLink="/shopping">Shoppings list</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a class="hover-pointer" routerLink="/signup">Register</a></li>
-        <li><a class="hover-pointer" routerLink="/signin">Login</a></li>
-        <li appDropdown class="dropdown">
+        <ng-template [ngIf]="!authService.isAuthenticated()">
+          <li><a class="hover-pointer" routerLink="/signup">Register</a></li>
+          <li><a class="hover-pointer" routerLink="/signin">Login</a></li>
+        </ng-template>
+        <li *ngIf="authService.isAuthenticated()"><a class="hover-pointer" (click)="onLogout()">Logout</a></li>
+        <li appDropdown class="dropdown" *ngIf="authService.isAuthenticated()">
           <a class="hover-pointer" class="dropdown-toggle" role="button">Manage <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a class="hover-pointer" (click)="onUpdateData()">Save</a></li>

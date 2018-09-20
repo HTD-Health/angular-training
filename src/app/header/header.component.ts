@@ -3,6 +3,7 @@ import { Recipe } from '../shared/recipe.model';
 import { Ingredient } from "../shared/ingredient.model"
 import { RequestsService } from '../services/requests.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -14,7 +15,7 @@ export class HeaderComponent implements OnInit {
   recipes: Recipe[]
   shoppings: Ingredient[]
 
-  constructor(private requestsService: RequestsService, private router: Router) { }
+  constructor(private requestsService: RequestsService, private router: Router, private authService: AuthService) { }
 
   ngOnInit() {
   }
@@ -33,6 +34,10 @@ export class HeaderComponent implements OnInit {
 
   onFetchData() {
     this.requestsService.fetchData()
+  }
+
+  onLogout() {
+    this.authService.logoutUser()
   }
 
 }
