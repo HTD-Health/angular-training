@@ -13,7 +13,6 @@ import { RecipesService } from './services/recipes.service';
 import { RequestsService } from './services/requests.service';
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './auth/auth-guard.service';
-import { RecipesModule } from './recipes/recipes.module';
 import { ShoppingListModule } from './shopping-list/shopping-list.module';
 import { SharedModule } from './shared/shared.module';
 import { AuthModule } from './auth/auth.module';
@@ -31,7 +30,6 @@ import { HomeComponent } from './home/home.component';
     BrowserModule,
     BrowserAnimationsModule,
     HttpModule,
-    RecipesModule,
     ShoppingListModule,
     AuthModule,
     AppRoutingModule
