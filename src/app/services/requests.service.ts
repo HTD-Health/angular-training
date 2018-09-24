@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Http, Response } from "@angular/http";
+import { HttpClient, HttpParams, HttpRequest } from '@angular/common/http'
 import { RecipesService } from '../services/recipes.service';
 import { ShoppingListService } from '../services/shopping-list.service';
 import { Recipe } from '../shared/recipe.model'
@@ -11,26 +11,24 @@ import { AuthService } from "./auth.service";
 
 export class RequestsService {
 
-    constructor(private http: Http, private shoppingsService: ShoppingListService, private recipesService: RecipesService, private authService: AuthService) {}
+    constructor(private httpClient: HttpClient, private shoppingsService: ShoppingListService, private recipesService: RecipesService, private authService: AuthService) {}
 
     updateData() {
-        const token = this.authService.getToken()
         const recipes = this.recipesService.getRecipes()
         const shoppings = this.shoppingsService.getIngredients()
-        return this.http.put('https://ng-project-999a1.firebaseio.com/data.json?auth=' + token, {
-            recipes: recipes,
-            shoppings: shoppings
-        })
+        const requ = new HttpRequest('PUT', 'https://ng-project-999a1.firebaseio.com/data.json', {recipes: recipes, shoppings: shoppings}, {reportProgress: true})
+        return this.httpClient.request(requ)
     }
 
     fetchData() {
-        const token = this.authService.getToken()
-        return this.http.get('https://ng-project-999a1.firebaseio.com/data.json?auth=' + token).pipe(
+        return this.httpClient.get('https://ng-project-999a1.firebaseio.com/data.json', {
+            observe: 'body',
+            responseType: 'json'
+        }).pipe(
             map(
-                (response: Response) => {
-                    const data: {shoppings: Ingredient[], recipes: Recipe[]} = response.json()
-                    const recipes: Recipe[] = data.recipes
-                    const shoppings: Ingredient[] = data.shoppings
+                (response: {recipes: Recipe[], shoppings: Ingredient[]}) => {
+                    const recipes: Recipe[] = response.recipes
+                    const shoppings: Ingredient[] = response.shoppings
                     for(let recipe of recipes) {
                         if (!recipe['ingredients']) {
                             recipe['ingredients'] = []

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Response } from '@angular/http';
 import { RequestsService } from '../../services/requests.service';
 import { AuthService } from '../../services/auth.service';
 
@@ -18,8 +17,8 @@ export class HeaderComponent implements OnInit {
   onUpdateData() {
     
     this.requestsService.updateData().subscribe(
-      (response: Response) => {
-        console.log(response)
+      (response) => {
+
       },
       (error) => {
         console.log(error)
