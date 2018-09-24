@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Recipe } from '../../shared/recipe.model';
-import { Ingredient } from "../../shared/ingredient.model"
+import { Response } from '@angular/http';
 import { RequestsService } from '../../services/requests.service';
-import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -12,10 +10,7 @@ import { AuthService } from '../../services/auth.service';
 })
 export class HeaderComponent implements OnInit {
 
-  recipes: Recipe[]
-  shoppings: Ingredient[]
-
-  constructor(private requestsService: RequestsService, private router: Router, private authService: AuthService) { }
+  constructor(private requestsService: RequestsService, private authService: AuthService) { }
 
   ngOnInit() {
   }
@@ -23,7 +18,7 @@ export class HeaderComponent implements OnInit {
   onUpdateData() {
     
     this.requestsService.updateData().subscribe(
-      (response) => {
+      (response: Response) => {
         console.log(response)
       },
       (error) => {
@@ -38,6 +33,10 @@ export class HeaderComponent implements OnInit {
 
   onLogout() {
     this.authService.logoutUser()
+  }
+
+  isAuthenticated() {
+    return this.authService.isAuthenticated()
   }
 
 }
