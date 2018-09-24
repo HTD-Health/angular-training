@@ -6,8 +6,6 @@ import { MealService } from './services/meal.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { MealsComponent } from './meals-planner/meals/meals.component';
-import { HeaderComponent } from './header/header.component';
 import { ShoppingListService } from './services/shopping-list.service';
 import { RecipesService } from './services/recipes.service';
 import { RequestsService } from './services/requests.service';
@@ -16,14 +14,12 @@ import { AuthGuard } from './auth/auth-guard.service';
 import { ShoppingListModule } from './shopping-list/shopping-list.module';
 import { SharedModule } from './shared/shared.module';
 import { AuthModule } from './auth/auth.module';
-import { HomeComponent } from './home/home.component';
+import { MealPlannerModule } from './meals-planner/meals-planner.module'
+import { CoreModule } from './core/core.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    MealsComponent,
-    HeaderComponent,
-    HomeComponent
+    AppComponent
   ],
   imports: [
     SharedModule,
@@ -32,6 +28,8 @@ import { HomeComponent } from './home/home.component';
     HttpModule,
     ShoppingListModule,
     AuthModule,
+    MealPlannerModule,
+    CoreModule,
     AppRoutingModule
   ],
   providers: [MealService, ShoppingListService, RecipesService, RequestsService, AuthService, AuthGuard],

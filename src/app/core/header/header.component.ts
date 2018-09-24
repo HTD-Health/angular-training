@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Recipe } from '../shared/recipe.model';
-import { Ingredient } from "../shared/ingredient.model"
-import { RequestsService } from '../services/requests.service';
+import { Recipe } from '../../shared/recipe.model';
+import { Ingredient } from "../../shared/ingredient.model"
+import { RequestsService } from '../../services/requests.service';
 import { Router } from '@angular/router';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-header',
