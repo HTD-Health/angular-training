@@ -1,21 +1,27 @@
 import { Injectable } from "@angular/core";
-import { HttpClient, HttpParams, HttpRequest } from '@angular/common/http'
+import { HttpClient, HttpRequest } from '@angular/common/http'
 import { RecipesService } from '../services/recipes.service';
-import { ShoppingListService } from '../services/shopping-list.service';
 import { Recipe } from '../shared/recipe.model'
 import { Ingredient } from '../shared/ingredient.model'
 import { map } from 'rxjs/operators'
-import { AuthService } from "./auth.service";
+import { Subscription } from "rxjs";
+import * as fromShoppingList from '../shopping-list/store/shopping-list.reducers';
+import { Store } from "@ngrx/store";
 
 @Injectable()
 
 export class RequestsService {
 
-    constructor(private httpClient: HttpClient, private shoppingsService: ShoppingListService, private recipesService: RecipesService, private authService: AuthService) {}
+    constructor(private httpClient: HttpClient, private store: Store<fromShoppingList.AppState>, private recipesService: RecipesService) {}
 
     updateData() {
+        let shoppings = null
+        let subscription: Subscription = this.store.select('shoppingList').subscribe(
+            (data) => {
+                shoppings = data.ingredients
+            }
+        )
         const recipes = this.recipesService.getRecipes()
-        const shoppings = this.shoppingsService.getIngredients()
         const requ = new HttpRequest('PUT', 'https://ng-project-999a1.firebaseio.com/data.json', {recipes: recipes, shoppings: shoppings}, {reportProgress: true})
         return this.httpClient.request(requ)
     }
@@ -39,7 +45,6 @@ export class RequestsService {
             )
         ).subscribe(
             ({recipes, shoppings}) => {
-                this.shoppingsService.updateAllIngredients(shoppings)
                 this.recipesService.updateAllRecipes(recipes)
                 return {recipes, shoppings}
             }

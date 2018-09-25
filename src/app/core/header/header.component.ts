@@ -18,7 +18,7 @@ export class HeaderComponent implements OnInit {
     
     this.requestsService.updateData().subscribe(
       (response) => {
-
+        
       },
       (error) => {
         console.log(error)
